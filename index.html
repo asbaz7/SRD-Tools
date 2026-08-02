@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Toolroom — Workshop Tool Tracker</title>
+<meta name="description" content="Track tools and transfers across every workshop.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+
+<!-- ===================== LOGIN SCREEN ===================== -->
+<div id="loginScreen" class="login-screen hidden">
+  <div class="login-card">
+    <div class="tag-mark" aria-hidden="true"><span class="tag-hole"></span></div>
+    <h1 class="login-title">TOOLROOM</h1>
+    <p class="login-sub">Sign in to check tools in, out, and across sites.</p>
+    <form id="loginForm">
+      <label class="field">
+        <span>Email</span>
+        <input id="loginEmail" type="email" required autocomplete="username">
+      </label>
+      <label class="field">
+        <span>Password</span>
+        <input id="loginPassword" type="password" required autocomplete="current-password">
+      </label>
+      <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+      <p id="loginError" class="form-error hidden"></p>
+    </form>
+    <p class="login-hint">No account? Ask your toolroom admin to create one for you.</p>
+    <p class="build-stamp" id="buildStamp"></p>
+  </div>
+</div>
+
+<!-- ===================== APP SHELL ===================== -->
+<div id="app" class="app hidden">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">
+        <span class="brand-tag"><span class="tag-hole-sm"></span></span>
+        <span class="brand-name">TOOLROOM</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <select id="workshopFilter" class="workshop-select" aria-label="Filter by workshop">
+        <option value="">All workshops</option>
+      </select>
+      <div class="user-chip" id="userChip">
+        <span class="user-name" id="userName">—</span>
+        <span class="user-role" id="userRole">—</span>
+      </div>
+      <button id="signOutBtn" class="btn btn-ghost btn-sm">Sign out</button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <nav class="sidenav" id="sideNav" aria-label="Main navigation">
+      <button class="nav-item active" data-view="dashboard"><span class="nav-ico" aria-hidden="true">◆</span>Dashboard</button>
+      <button class="nav-item" data-view="tools"><span class="nav-ico" aria-hidden="true">▣</span>Tools</button>
+      <button class="nav-item" data-view="log"><span class="nav-ico" aria-hidden="true">≡</span>Transfer log</button>
+      <button class="nav-item" data-view="workshops" data-admin-only><span class="nav-ico" aria-hidden="true">▲</span>Workshops</button>
+      <button class="nav-item" data-view="users" data-admin-only><span class="nav-ico" aria-hidden="true">●</span>People</button>
+    </nav>
+
+    <main class="view-container" id="viewContainer">
+      <!-- Views are rendered here by app.js -->
+    </main>
+  </div>
+
+  <nav class="bottomnav" id="bottomNav" aria-label="Main navigation">
+    <button class="nav-item active" data-view="dashboard"><span class="nav-ico" aria-hidden="true">◆</span><span>Home</span></button>
+    <button class="nav-item" data-view="tools"><span class="nav-ico" aria-hidden="true">▣</span><span>Tools</span></button>
+    <button class="nav-item" data-view="log"><span class="nav-ico" aria-hidden="true">≡</span><span>Log</span></button>
+    <button class="nav-item" data-view="workshops" data-admin-only><span class="nav-ico" aria-hidden="true">▲</span><span>Sites</span></button>
+    <button class="nav-item" data-view="users" data-admin-only><span class="nav-ico" aria-hidden="true">●</span><span>People</span></button>
+  </nav>
+</div>
+
+<!-- ===================== MODAL ===================== -->
+<div id="modalRoot" class="modal-root hidden">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal" id="modalBox" role="dialog" aria-modal="true"></div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js?v=3"></script>
+</body>
+</html>
